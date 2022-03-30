@@ -1,4 +1,4 @@
-FROM 3.1.0
+FROM ruby:3.1.0
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client cmake
 RUN mkdir /opt/app
