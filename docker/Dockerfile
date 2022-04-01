@@ -4,6 +4,8 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client cmake
 RUN mkdir /opt/app
 WORKDIR /opt/app
 
+# RUN useradd -u 1000 --create-home --home-dir /opt/app --shell /bin/bash mks 
+
 COPY ./Gemfile ./Gemfile.lock ./
 
 RUN bundle install
