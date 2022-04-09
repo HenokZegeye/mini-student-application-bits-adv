@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_01_081707) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_085354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_081707) do
     t.index ["academic_year_id"], name: "index_application_announcements_on_academic_year_id"
   end
 
+  create_table "applications", force: :cascade do |t|
+    t.string "status"
+    t.boolean "payment_made"
+    t.bigint "applicant_id", null: false
+    t.bigint "application_announcement_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["applicant_id"], name: "index_applications_on_applicant_id"
+    t.index ["application_announcement_id"], name: "index_applications_on_application_announcement_id"
+  end
+
   create_table "program_levels", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -80,4 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_081707) do
   add_foreign_key "academic_programs", "programs"
   add_foreign_key "application_announcements", "academic_programs"
   add_foreign_key "application_announcements", "academic_years"
+  add_foreign_key "applications", "applicants"
+  add_foreign_key "applications", "application_announcements"
 end
